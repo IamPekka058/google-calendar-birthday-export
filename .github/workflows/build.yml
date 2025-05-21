@@ -10,8 +10,8 @@ permissions:
   contents: write
 
 jobs:
-  build:
-    name: Build Exe
+  build-linux:
+    name: Build Linux
     runs-on: ubuntu-latest
 
     steps:
@@ -22,8 +22,24 @@ jobs:
 
       - run: pip install -r requirements.txt pyinstaller
       - run: pyinstaller --onefile export.py --collect-all pyfiglet --name "GCBE"
+      - name: Release Linux Artifacts
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: dist/GCBE
 
-      - name: Release Artifacts
+  build-windows:
+    name: Build Windows Exe
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.13.3
+      - run: pip install -r requirements.txt pyinstaller
+      - run: pyinstaller --onefile export.py --collect-all pyfiglet --name "GCBE"
+      - name: Release Windows Artifacts
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
