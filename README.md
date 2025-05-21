@@ -11,6 +11,10 @@ A simple Python tool to export birthdays from Google Contacts (CSV or VCF) to an
 - Customizable event summaries (with placeholders for names)
 - Interactive configuration in the terminal
 
+**Note:**  
+You can use the pre-built `.exe` file available in the [Releases](https://github.com/IamPekka058/google-calendar-birthday-export/releases) section. This allows you to run the tool without installing Python or any dependencies.
+
+
 ## Requirements
 - Python 3.7 or newer
 - All required packages are listed in `requirements.txt`
