@@ -30,7 +30,7 @@ def populate_ics_file(list_of_contacts, summary_template, verbose):
     :return: iCalendar object
     """
     cal = Calendar()
-    cal.add('prodid', '-//Geburtstage CSV Import//example.com//')
+    cal.add('prodid', '-//GCBE//https://github.com/IamPekka058/google-calendar-birthday-export//')
     cal.add('version', '2.0')
 
     count = 0
