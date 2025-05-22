@@ -1,4 +1,5 @@
 import csv
+import os
 from datetime import datetime
 import questionary
 from contact import Contact
@@ -13,7 +14,12 @@ def start():
   return readCSVFile(file_path)
 
 def checkIfCSVFileIsValid(file_path):
-  print("Checking if file is valid: []", end="\r")
+
+  if not os.path.isfile(file_path):
+    print(f"Checking if file is valid: [✖]", end="\n")
+    print(f"The file {file_path} does not exist.")
+    exit(1)
+
   try:
     with open(file_path, 'r', encoding='utf-8') as file:
       reader = csv.reader(file)
@@ -27,8 +33,8 @@ def checkIfCSVFileIsValid(file_path):
           exit(1)
 
     print("Checking if file is valid: [✓]", end="\n")
-  except FileNotFoundError:
-    print(f"The file {file_path} does not exist.")
+  except Exception as e:
+    print(f"An error ({e.args}) occurred while reading the file {file_path}.")
     exit(1)
 
 
